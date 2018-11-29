@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Builders;
 
-use App\Models\Builders\Sites\AaulypSiteBuilder;
+use App\Builders\Sites\AaulypSiteBuilder;
 use Tests\TestCase;
 
 

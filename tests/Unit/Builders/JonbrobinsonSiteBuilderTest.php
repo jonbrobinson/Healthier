@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Builders;
 
-use App\Models\Builders\Sites\JonbrobinsonSiteBuilder;
+use App\Builders\Sites\JonbrobinsonSiteBuilder;
 use Tests\TestCase;
 
 

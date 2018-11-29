@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Builders\Sites;
+namespace App\Builders\Sites;
 
 use App\Builders\Sites\SiteBuilderAbstract;
 
