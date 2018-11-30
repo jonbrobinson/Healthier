@@ -20,7 +20,7 @@ class AaulypSiteBuilder extends SiteBuilderAbstract
      */
     public function getBaseUrl()
     {
-        return "aaulyp.org";
+        return "aaulyp.org ss";
     }
 
     /**
