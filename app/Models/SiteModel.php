@@ -15,11 +15,14 @@ class SiteModel
 
     public $endpoints;
 
+    public $urls;
+
     public function populateFromSiteBuilder(SiteBuilderAbstract $builder)
     {
         $this->name = $builder->getName();
         $this->description = $builder->getDescription();
         $this->baseUrl = $builder->getBaseUrl();
         $this->endpoints = $builder->getEndpoints();
+        $this->urls = $builder->buildSiteUrls();
     }
 }

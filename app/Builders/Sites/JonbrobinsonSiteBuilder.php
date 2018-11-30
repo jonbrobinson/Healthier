@@ -2,7 +2,7 @@
 
 namespace App\Builders\Sites;
 
-use App\Builders\Sites\SiteBuilderAbstract;
+use App\Constants\HttpClientConstants;
 
 class JonbrobinsonSiteBuilder extends SiteBuilderAbstract
 {
@@ -30,6 +30,9 @@ class JonbrobinsonSiteBuilder extends SiteBuilderAbstract
      */
     public function getEndpoints()
     {
-        return [];
+        return [
+            HttpClientConstants::METHOD_GET =>[],
+            HttpClientConstants::METHOD_POST => []
+        ];
     }
 }

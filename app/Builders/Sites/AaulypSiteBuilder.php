@@ -2,7 +2,7 @@
 
 namespace App\Builders\Sites;
 
-use App\Builders\Sites\SiteBuilderAbstract;
+use App\Constants\HttpClientConstants;
 
 class AaulypSiteBuilder extends SiteBuilderAbstract
 {
@@ -31,8 +31,11 @@ class AaulypSiteBuilder extends SiteBuilderAbstract
     public function getEndpoints()
     {
         return [
-            "events",
-            "join"
+            HttpClientConstants::METHOD_GET =>[
+                "events",
+                "join"
+            ],
+            HttpClientConstants::METHOD_POST => []
         ];
     }
 }

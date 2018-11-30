@@ -2,6 +2,7 @@
 
 namespace App\Builders\Sites;
 
+use App\Constants\HttpClientConstants;
 use App\Interfaces\SiteBuilderInterface;
 use App\Models\SiteModel;
 
@@ -56,6 +57,37 @@ abstract class SiteBuilderAbstract implements SiteBuilderInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @return array
+     */
+    public function buildSiteUrls()
+    {
+        $baseUrl = $this->getBaseUrl();
+        $endpointGroups = $this->getEndpoints();
+
+        $methodTypes = [
+            HttpClientConstants::METHOD_GET,
+            HttpClientConstants::METHOD_POST
+        ];
+
+        $urls = [];
+        foreach($methodTypes as $method)
+        {
+            if ($method == HttpClientConstants::METHOD_GET) {
+                $urls[$method][] = '//'.$baseUrl;
+            }
+
+            foreach($endpointGroups[$method] as $endpoint)
+            {
+                $url = '//'.$baseUrl.'/'.$endpoint;
+
+                $urls[$method][] = $url;
+            }
+        }
+
+        return $urls;
     }
 
     /**
