@@ -6,7 +6,8 @@ use App\Builders\Sites\JonbrobinsonSiteBuilder;
 use App\Factories\SiteBuilderFactory;
 use App\Builders\Sites\AaulypSiteBuilder;
 use PHPUnit\Framework\Error\Error;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestResult;
 
 
 class SiteBuilderFactoryTest extends TestCase
@@ -43,6 +44,6 @@ class SiteBuilderFactoryTest extends TestCase
     {
         $factory = new SiteBuilderFactory();
 
-        $factory->getSiteBuilder("test");
+        $factory->getSiteBuilder("NonExistentSiteBuilders");
     }
 }
