@@ -20,7 +20,7 @@ class SiteBuilderFactoryTest extends TestCase
     {
         $factory = new SiteBuilderFactory();
 
-        $builder = $factory->getSiteBuilder("Aaulypghjjh");
+        $builder = $factory->getSiteBuilder("Aaulyp");
 
         $this->assertInstanceOf(AaulypSiteBuilder::class, $builder);
     }
