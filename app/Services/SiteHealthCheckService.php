@@ -8,9 +8,9 @@ use GuzzleHttp\Client;
 class SiteHealthCheckService
 {
 
-    public function __construct()
+    public function __construct(HttpClient $client)
     {
-        $this->httpClient = $this->getGuzzleClient();
+
     }
 
     public function runOwnedSiteReports()
@@ -21,9 +21,7 @@ class SiteHealthCheckService
 
     protected function getGuzzleClient()
     {
-        $httpClient = new Client();
 
-        return $httpClient;
     }
 
 }

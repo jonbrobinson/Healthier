@@ -37,12 +37,16 @@ class AaulypSiteBuilderTest extends TestCase
         $builder = new AaulypSiteBuilder();
 
         $actual = $builder->buildSiteUrls();
-        $this->assertCount(1, $actual);
-        $this->assertContains('//aaulyp.org', $actual[HttpClientConstants::METHOD_GET]);
-        $this->assertContains('//aaulyp.org/events', $actual[HttpClientConstants::METHOD_GET]);
-        $this->assertContains('//aaulyp.org/join', $actual[HttpClientConstants::METHOD_GET]);
-        $this->assertCount(3, $actual[HttpClientConstants::METHOD_GET]);
-        $this->assertArrayNotHasKey(HttpClientConstants::METHOD_POST, $actual);
+        $this->assertCount(3, $actual);
+        $this->assertEquals('//aaulyp.org', $actual[0]['url']);
+        $this->assertEquals('GET', $actual[0]['method']);
+        $this->assertCount(2, $actual[0]);
+        $this->assertEquals('//aaulyp.org/events', $actual[1]['url']);
+        $this->assertEquals('GET', $actual[1]['method']);
+        $this->assertCount(2, $actual[1]);
+        $this->assertEquals('//aaulyp.org/join', $actual[2]['url']);
+        $this->assertEquals('GET', $actual[2]['method']);
+        $this->assertCount(2, $actual[2]);
     }
 
     public function testMakeSite()

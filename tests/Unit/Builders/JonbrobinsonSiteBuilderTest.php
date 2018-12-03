@@ -37,9 +37,9 @@ class JonbrobinsonBuilderTest extends TestCase
 
         $actual = $builder->buildSiteUrls();
         $this->assertCount(1, $actual);
-        $this->assertContains('//jonbrobinson.com', $actual[HttpClientConstants::METHOD_GET]);
-        $this->assertCount(1, $actual[HttpClientConstants::METHOD_GET]);
-        $this->assertArrayNotHasKey(HttpClientConstants::METHOD_POST, $actual);
+        $this->assertEquals('//jonbrobinson.com', $actual[0]['url']);
+        $this->assertEquals('GET', $actual[0]['method']);
+        $this->assertCount(2, $actual[0]);
     }
 
     public function testMakeSite()

@@ -76,14 +76,16 @@ abstract class SiteBuilderAbstract implements SiteBuilderInterface
         foreach($methodTypes as $method)
         {
             if ($method == HttpClientConstants::METHOD_GET) {
-                $urls[$method][] = '//'.$baseUrl;
+                $url['method'] = $method;
+                $url['url'] = '//'.$baseUrl;
+                $urls[] = $url;
             }
 
             foreach($endpointGroups[$method] as $endpoint)
             {
-                $url = '//'.$baseUrl.'/'.$endpoint;
-
-                $urls[$method][] = $url;
+                $url['method'] = $method;
+                $url['url'] = '//'.$baseUrl.'/'.$endpoint;
+                $urls[] = $url;
             }
         }
 

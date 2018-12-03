@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use App\Constants\HttpClientConstants;
 
 /**
  * Class UrlHealthModel
@@ -9,22 +10,22 @@ class UrlHealthModel
     /**
      * @var string
      */
-    protected $url;
+    public $url;
 
     /**
      * @var int
      */
-    protected $code;
+    public $code;
 
     /**
      * var string
      */
-    protected $message;
+    public $message;
 
     /**
-     * @var object
+     * @var string
      */
-    protected $meta;
+    public $method;
 
     /**
      * @var bool
@@ -32,67 +33,27 @@ class UrlHealthModel
     protected $error = false;
 
     /**
-     * @return string
-     */
-    public function getUrl(){
-        return $this->url;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCode(){
-        return $this->code;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessage(){
-        return $this->message;
-    }
-
-    /**
-     * @return object
-     */
-    public function getMeta(){
-        return $this->meta;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * @param string $url
-     */
-    public function setUrl($url){
-        $this->url = $url;
-    }
-
-    /**
-     * @param int $code
-     */
-    public function setCode($code){
-        $this->code = $code;
-    }
-
-    /**
-     * @param string $message
-     */
-    public function setMessage($message){
-        $this->message = $message;
-    }
-
-    /**
      * @param mixed $bool
      */
     public function setError($bool)
     {
         $this->error = filter_var($bool, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * @param \Psr\Http\Message\ResponseInterface $response
+     *
+     * @return UrlHealthModel
+     */
+    public function updateUrlStatusWithResponse($response)
+    {
+        $this->code = $response->getStatusCode();
+        $this->message = $response->getBody()->getContents();
+
+        if (HttpClientConstants::RESPONSE_STATUS_OK != $this->code) {
+            $this->setError(true);
+        }
+
+        return $this;
     }
 }
