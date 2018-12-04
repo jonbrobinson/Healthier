@@ -9,6 +9,6 @@ class SiteHealthCheckServiceTest extends TestCase
 
     public function testSite()
     {
-        $this->assertTrue(true);
+        $this->assertFalse(false);
     }
 }
