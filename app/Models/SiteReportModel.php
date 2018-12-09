@@ -47,9 +47,8 @@ class SiteReportModel extends SiteModel
 
         foreach ($statuses as $status)
         {
-            if (HttpClientConstants::RESPONSE_STATUS_OK == $status->code) {
+            if (HttpClientConstants::RESPONSE_STATUS_OK != $status->code) {
                 $errorStatuses[] = $status;
-
             }
         }
 

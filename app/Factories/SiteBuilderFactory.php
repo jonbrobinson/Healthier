@@ -2,8 +2,15 @@
 
 namespace App\Factories;
 
+use App\Builders\Sites\SiteBuilderAbstract;
+
 class SiteBuilderFactory
 {
+    /**
+     * @param $name
+     *
+     * @return SiteBuilderAbstract
+     */
     public function getSiteBuilder($name)
     {
         $qualifiedClassName = $this->getQualifiedClassName($name);
