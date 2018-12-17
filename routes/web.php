@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('ownedSites');
 });
 
 
-Route::get('/sites', 'SitesController@index');
+Route::get('/sites', 'SitesController@index')->name('ownedSites');

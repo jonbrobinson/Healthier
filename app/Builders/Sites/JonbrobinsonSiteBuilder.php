@@ -31,7 +31,9 @@ class JonbrobinsonSiteBuilder extends SiteBuilderAbstract
     public function getEndpoints()
     {
         return [
-            HttpClientConstants::METHOD_GET =>[],
+            HttpClientConstants::METHOD_GET =>[
+                "posts"
+            ],
             HttpClientConstants::METHOD_POST => []
         ];
     }
