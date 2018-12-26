@@ -27,7 +27,7 @@ class JonbrobinsonBuilderTest extends TestCase
         $actual = $builder->getEndpoints();
 
         $this->assertCount(2, $actual);
-        $this->assertEmpty($actual[HttpClientConstants::METHOD_GET]);
+        $this->assertCount(1, $actual[HttpClientConstants::METHOD_GET]);
         $this->assertEmpty($actual[HttpClientConstants::METHOD_POST]);
     }
 
@@ -36,7 +36,7 @@ class JonbrobinsonBuilderTest extends TestCase
         $builder = new JonbrobinsonSiteBuilder();
 
         $actual = $builder->buildSiteUrls();
-        $this->assertCount(1, $actual);
+        $this->assertCount(2, $actual);
         $this->assertEquals('//jonbrobinson.com', $actual[0]['url']);
         $this->assertEquals('GET', $actual[0]['method']);
         $this->assertCount(2, $actual[0]);

@@ -6,9 +6,7 @@ use App\Builders\Sites\JonbrobinsonSiteBuilder;
 use App\Factories\SiteBuilderFactory;
 use App\Builders\Sites\AaulypSiteBuilder;
 use PHPUnit\Framework\Error\Error;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\TestResult;
-
+use Tests\TestCase;
 
 class SiteBuilderFactoryTest extends TestCase
 {
