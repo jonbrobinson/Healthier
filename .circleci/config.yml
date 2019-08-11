@@ -9,6 +9,7 @@ jobs:
       # Specify the version you desire here
       #- image: circleci/php:7.1-node-browsers
       - image: jrcodes/laravel57-php73
+      - image: composer:latest
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -34,7 +35,15 @@ jobs:
 #            # fallback to using the latest cache if no exact match is found
 #            - v1-dependencies-
 #
-      - run: composer install -n --prefer-dist
+      - run:
+          name: Move Composer
+          command: |
+            mv composer.phar /usr/local/bin/composer
+
+      - run:
+          name: Composer Install
+          command: |
+           composer install -n --prefer-dist
 #
 #      - save_cache:
 #          key: v1-dependencies-{{ checksum "composer.json" }}
