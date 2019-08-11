@@ -38,12 +38,14 @@ jobs:
       - run:
           name: Move Composer
           command: |
-            mv composer.phar /usr/local/bin/composer
+#            mv composer.phar /usr/local/bin/composer
+            ls -la
 
-      - run:
-          name: Composer Install
-          command: |
-           composer install -n --prefer-dist
+
+#      - run:
+#          name: Composer Install
+#          command: |
+#           composer install -n --prefer-dist
 #
 #      - save_cache:
 #          key: v1-dependencies-{{ checksum "composer.json" }}
@@ -64,4 +66,4 @@ jobs:
 #      - run: php artisan migrate --env=testing --database=sqlite_testing --force
 
       # run tests with phpunit or codecept
-      - run: ./vendor/bin/phpunit
+#      - run: ./vendor/bin/phpunit
