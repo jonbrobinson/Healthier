@@ -3,9 +3,9 @@ namespace App\Helpers;
 
 use Exception;
 use App\Constants\HttpClientConstants;
-use App\Models\SiteModel;
-use App\Models\SiteReportModel;
-use App\Models\UrlHealthModel;
+use App\Models\Site;
+use App\Models\SiteReport;
+use App\Models\UrlHealth;
 use App\Services\HttpClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
@@ -28,12 +28,57 @@ class SiteReportHelper
     }
 
     /**
+     * @param Site[] $sites
+     *
+     * @return SiteReport[]
+     */
+    public function buildReportsFromSites($sites)
+    {
+        $reports = [];
+
+        foreach($sites as $site)
+        {
+            $reports[] = $this->buildReportFromSite($site);
+        }
+
+        return $reports;
+    }
+
+    /**
+     * @param Site $site
+     *
+     * @return SiteReport
+     */
+    public function buildReportFromSite($site)
+    {
+        $report = new SiteReport($site);
+
+        foreach ($site->urls as $urlDetails)
+        {
+            $method = $urlDetails['method'];
+            $url = $urlDetails['url'];
+            $response = $this->sendSiteUrlRequest($method, $url);
+
+            $status = new UrlHealth();
+            $status->url = $url;
+            $status->method = $method;
+            $status->updateUrlStatusWithResponse($response);
+
+            $report->addStatus($status);
+        }
+
+        $report->calculateStatus();
+
+        return $report;
+    }
+
+    /**
      * @param string $method
      * @param string $url
      *
      * @return Response|ResponseInterface
      */
-    public function sendSiteUrlRequest($method, $url)
+    protected function sendSiteUrlRequest($method, $url)
     {
         $headers = [];
         try {
@@ -55,34 +100,5 @@ class SiteReportHelper
         }
 
         return $response;
-    }
-
-    /**
-     * @param SiteModel $site
-     *
-     * @return SiteReportModel
-     */
-    public function buildReportFromSite($site)
-    {
-        $report = new SiteReportModel();
-        $report->populateSiteData($site);
-
-        foreach ($site->urls as $urlDetails)
-        {
-            $method = $urlDetails['method'];
-            $url = $urlDetails['url'];
-            $response = $this->sendSiteUrlRequest($method, $url);
-
-            $status = new UrlHealthModel();
-            $status->url = $url;
-            $status->method = $method;
-            $status->updateUrlStatusWithResponse($response);
-
-            $report->addStatus($status);
-        }
-
-        $report->calculateStatus();
-
-        return $report;
     }
 }

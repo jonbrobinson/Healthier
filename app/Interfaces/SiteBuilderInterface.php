@@ -2,41 +2,47 @@
 
 namespace App\Interfaces;
 
-use App\Models\SiteModel;
+use App\Models\Site;
 
 interface SiteBuilderInterface
 {
     /**
-     * @return SiteModel
+     * @return Site
      */
-    public function makeSite();
+    public function getSite();
 
     /**
-     * Get the name of a website
-     *
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * Get the description of a website
-     *
-     * @return string
-     */
-    public function getDescription();
-
-    /**
-     * Get the base url of a website
-     *
      * @return string
      */
     public function getBaseUrl();
 
     /**
-     * Get the endpoints associated with a website to check
-     *
      * @return array
      */
     public function getEndpoints();
 
+    /**
+     * @return void
+     */
+    public function setName();
+
+    /**
+     * @return void
+     */
+    public function setDescription();
+
+    /**
+     * @return void
+     */
+    public function setBaseUrl();
+
+    /**
+     * @return void
+     */
+    public function setEndpoints();
+
+    /**
+     * @return void
+     */
+    public function setUrls();
 }

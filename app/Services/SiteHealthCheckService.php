@@ -2,41 +2,54 @@
 
 namespace App\Services;
 
-use App\Factories\SiteBuilderFactory;
+use App\Builders\Sites\AaulypSiteBuilder;
+use App\Builders\Sites\JonbrobinsonSiteBuilder;
+use App\Directors\SitesDirector;
 use App\Helpers\SiteReportHelper;
-use App\Models\SiteReportModel;
+use App\Interfaces\SiteBuilderInterface;
+use App\Models\Site;
+use App\Models\SiteReport;
 
 class SiteHealthCheckService
 {
     public $reportHelper;
-    public $siteBuilderFactory;
 
-    public function __construct(SiteBuilderFactory $siteBuilderFactory, SiteReportHelper $reportHelper)
+    public function __construct(SiteReportHelper $reportHelper)
     {
-        $this->siteBuilderFactory = $siteBuilderFactory;
         $this->reportHelper = $reportHelper;
     }
 
     /**
-     * @return SiteReportModel[]
+     * @return SiteReport[]
      */
     public function runOwnedSiteReports()
     {
-        $reports = [];
-        $ownedSites = ['Aaulyp', 'Jonbrobinson'];
+        $ownedSitesBuilders = [new AaulypSiteBuilder(), new JonbrobinsonSiteBuilder()];
 
-        foreach ($ownedSites as $site)
-        {
-            $builder = $this->siteBuilderFactory->getSiteBuilder($site);
+        $sites = $this->buildSitesFromSiteBuilders($ownedSitesBuilders);
 
-            $site = $builder->makeSite();
-
-            $report = $this->reportHelper->buildReportFromSite($site);
-
-            $reports[] = $report;
-        }
+        $reports = $this->reportHelper->buildReportsFromSites($sites);
 
         return $reports;
+    }
+
+    /**
+     * @param SiteBuilderInterface[] $builders
+     *
+     * @return Site[]
+     */
+    public function buildSitesFromSiteBuilders($builders)
+    {
+        $director = new SitesDirector();
+        $sites = [];
+
+        foreach ($builders as $siteBuilder)
+        {
+            $director->setBuilder($siteBuilder);
+            $sites[] = $director->buildSite();
+        }
+
+        return $sites;
     }
 
 }

@@ -5,7 +5,7 @@ use App\Constants\HttpClientConstants;
 /**
  * Class UrlHealthModel
  */
-class UrlHealthModel
+class UrlHealth
 {
     /**
      * @var string
@@ -43,7 +43,7 @@ class UrlHealthModel
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
      *
-     * @return UrlHealthModel
+     * @return UrlHealth
      */
     public function updateUrlStatusWithResponse($response)
     {

@@ -6,13 +6,6 @@ use App\Constants\HttpClientConstants;
 
 class JonbrobinsonSiteBuilder extends SiteBuilderAbstract
 {
-
-    public function __construct()
-    {
-        $this->setName("Jonbrobinson");
-        $this->setDescription("A website for Jonathan Robinson");
-    }
-
     /**
      * Get the base url of a website
      *
@@ -36,5 +29,15 @@ class JonbrobinsonSiteBuilder extends SiteBuilderAbstract
             ],
             HttpClientConstants::METHOD_POST => []
         ];
+    }
+
+    public function setName()
+    {
+        $this->site->name = "Jonbrobinson";
+    }
+
+    public function setDescription()
+    {
+        $this->site->description = "A website for Jonathan Robinson";
     }
 }

@@ -34,18 +34,26 @@ class JonbrobinsonBuilderTest extends TestCase
     public function testBuildSiteUrls()
     {
         $builder = new JonbrobinsonSiteBuilder();
+        $builder->setUrls();
 
-        $actual = $builder->buildSiteUrls();
+        $actual = $builder->getSite()->urls;
+
         $this->assertCount(2, $actual);
         $this->assertEquals('//jonbrobinson.com', $actual[0]['url']);
         $this->assertEquals('GET', $actual[0]['method']);
         $this->assertCount(2, $actual[0]);
     }
 
-    public function testMakeSite()
+    public function testBuildSite()
     {
         $builder = new JonbrobinsonSiteBuilder();
-        $site = $builder->makeSite();
+        $builder->setName();
+        $builder->setDescription();
+        $builder->setBaseUrl();
+        $builder->setEndpoints();
+        $builder->setUrls();
+
+        $site = $builder->getSite();
 
         $this->assertEquals('Jonbrobinson', $site->name);
         $this->assertEquals('jonbrobinson.com', $site->baseUrl);

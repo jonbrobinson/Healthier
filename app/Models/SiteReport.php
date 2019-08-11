@@ -6,8 +6,13 @@ use App\Constants\HttpClientConstants;
 /**
  * Class Website Report Model
  */
-class SiteReportModel extends SiteModel
+class SiteReport
 {
+    /**
+     * @var Site
+     */
+    private $site;
+
     /**
      * @var string
      */
@@ -19,20 +24,21 @@ class SiteReportModel extends SiteModel
     public $date;
 
     /**
-     * @var UrlHealthModel[]
+     * @var UrlHealth[]
      */
     public $urlStatuses;
 
     /**
-     * @param SiteModel $site
+     * @param Site $site
      */
-    public function populateSiteData($site)
+    public function __construct($site)
     {
-        $this->name = $site->name;
-        $this->description = $site->description;
-        $this->baseUrl = $site->baseUrl;
-        $this->urls = $site->urls;
-        $this->endpoints = $site->endpoints;
+        $this->site = $site;
+    }
+
+    public function getSite()
+    {
+        return $this->site;
     }
 
     public function addStatus($status)

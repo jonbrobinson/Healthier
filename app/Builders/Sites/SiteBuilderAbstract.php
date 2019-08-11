@@ -4,65 +4,75 @@ namespace App\Builders\Sites;
 
 use App\Constants\HttpClientConstants;
 use App\Interfaces\SiteBuilderInterface;
-use App\Models\SiteModel;
+use App\Models\Site;
 
 abstract class SiteBuilderAbstract implements SiteBuilderInterface
 {
     /**
-     * @var string
+     * @var Site
      */
-    protected $name;
+    protected $site;
 
     /**
-     * @var string;
-     */
-    protected $description;
-
-    /**
-     * Get the base url of a website
-     *
      * @return string
      */
     abstract public function getBaseUrl();
 
     /**
-     * Get the endpoints associated with a website to check
-     *
      * @return array
      */
     abstract public function getEndpoints();
 
     /**
-     * @return SiteModel
+     * @return void
      */
-    public function makeSite()
-    {
-        $site = new SiteModel();
-        $site->populateFromSiteBuilder($this);
+    abstract public function setName();
 
-        return $site;
+    /**
+     * @return void
+     */
+    abstract public function setDescription();
+
+    public function __construct()
+    {
+        $this->reset();
     }
 
     /**
-     * @return string
+     * @return void
      */
-    public function getName()
+    public function reset()
     {
-        return $this->name;
+        $this->site = new Site();
     }
 
     /**
-     * @return string
+     * @return Site
      */
-    public function getDescription()
+    public function getSite()
     {
-        return $this->description;
+        return $this->site;
+    }
+
+    public function setBaseUrl()
+    {
+        $this->site->baseUrl = $this->getBaseUrl();
+    }
+
+    public function setEndpoints()
+    {
+        $this->site->endpoints = $this->getEndpoints();
+    }
+
+    public function setUrls()
+    {
+        $this->site->urls = $this->buildSiteUrls();
     }
 
     /**
      * @return array
      */
-    public function buildSiteUrls()
+    protected function buildSiteUrls()
     {
         $baseUrl = $this->getBaseUrl();
         $endpointGroups = $this->getEndpoints();
@@ -90,21 +100,5 @@ abstract class SiteBuilderAbstract implements SiteBuilderInterface
         }
 
         return $urls;
-    }
-
-    /**
-     * @param $name
-     */
-    protected function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @param $description
-     */
-    protected function setDescription($description)
-    {
-        $this->description = $description;
     }
 }

@@ -6,13 +6,6 @@ use App\Constants\HttpClientConstants;
 
 class AaulypSiteBuilder extends SiteBuilderAbstract
 {
-
-    public function __construct()
-    {
-        $this->setName("Austin Area Urban League");
-        $this->setDescription("A website for the Austin Area Urban League");
-    }
-
     /**
      * Get the base url of a website
      *
@@ -37,5 +30,15 @@ class AaulypSiteBuilder extends SiteBuilderAbstract
             ],
             HttpClientConstants::METHOD_POST => []
         ];
+    }
+
+    public function setName()
+    {
+        $this->site->name = "Austin Area Urban League";
+    }
+
+    public function setDescription()
+    {
+        $this->site->description = "A website for the Austin Area Urban League";
     }
 }

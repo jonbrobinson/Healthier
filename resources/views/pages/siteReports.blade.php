@@ -7,13 +7,13 @@
             <div class="card">
                 <div class="card-body">
                     @if($report->healthy)
-                        <h5 class="card-title">{{ $report->name }} <span class="badge badge-success">Healthy</span></h5>
+                        <h5 class="card-title">{{ $report->getSite()->name }} <span class="badge badge-success">Healthy</span></h5>
                     @else
-                        <h5 class="card-title">{{ $report->name }} <span class="badge badge-danger">Not Healthy</span></h5>
+                        <h5 class="card-title">{{ $report->getSite()->name }} <span class="badge badge-danger">Not Healthy</span></h5>
                     @endif
 
-                    <h6 class="card-subtitle mb-2 text-muted">{{ $report->baseUrl }}</h6>
-                    <p class="card-text">{{ $report->description }}</p>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ $report->getSite()->baseUrl }}</h6>
+                    <p class="card-text">{{ $report->getSite()->description }}</p>
                     <table class="table">
                         <thead>
                         <tr>
