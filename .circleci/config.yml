@@ -38,8 +38,9 @@ jobs:
       - run:
           name: Move Composer
           command: |
-#            mv composer.phar /usr/local/bin/composer
             ls -la
+#            mv composer.phar /usr/local/bin/composer
+
 
 
 #      - run:
