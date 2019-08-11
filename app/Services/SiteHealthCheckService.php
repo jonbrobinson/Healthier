@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Builders\Sites\AaulypSiteBuilder;
 use App\Builders\Sites\JonbrobinsonSiteBuilder;
+use App\Builders\Sites\KatinaAndTedSiteBuilder;
 use App\Directors\SitesDirector;
 use App\Helpers\SiteReportHelper;
 use App\Interfaces\SiteBuilderInterface;
@@ -24,7 +25,11 @@ class SiteHealthCheckService
      */
     public function runOwnedSiteReports()
     {
-        $ownedSitesBuilders = [new AaulypSiteBuilder(), new JonbrobinsonSiteBuilder()];
+        $ownedSitesBuilders = [
+            new AaulypSiteBuilder(),
+            new JonbrobinsonSiteBuilder(),
+            new KatinaAndTedSiteBuilder()
+        ];
 
         $sites = $this->buildSitesFromSiteBuilders($ownedSitesBuilders);
 
