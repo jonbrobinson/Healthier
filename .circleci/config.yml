@@ -37,7 +37,6 @@ workflows:
   test_build_push:
     jobs:
       - test:
-          context: jr-services
           filters:
             branches:
               only: /.*/
