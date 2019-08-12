@@ -46,7 +46,8 @@ jobs:
 
       - run:
           name: Run Composer Install
-          command: composer install -n --prefer-dist
+          command: |
+            composer install -n --prefer-dist
 
 
 
@@ -76,4 +77,5 @@ jobs:
       # run tests with phpunit or codecept
       - run:
           name: Run Unit Test
-          commnad: ./vendor/bin/phpunit
+          commnad: |
+            php ./vendor/bin/phpunit
