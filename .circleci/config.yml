@@ -48,7 +48,6 @@ jobs:
           name: Run Composer Install
           command: |
             composer install -n --prefer-dist
-      - run: ls -la
 
 
 
