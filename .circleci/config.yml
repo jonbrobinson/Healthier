@@ -77,5 +77,5 @@ jobs:
       # run tests with phpunit or codecept
       - run:
           name: Run Unit Test
-          commnad: |
+          command: |
             php ./vendor/bin/phpunit
