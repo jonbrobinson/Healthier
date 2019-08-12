@@ -3,38 +3,18 @@
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
 version: 2
-jobs:
-  build:
+
+executors:
+  laravel57:
     docker:
-      # Specify the version you desire here
-      #- image: circleci/php:7.1-node-browsers
       - image: jrcodes/laravel57-php73
-      - image: composer:latest
+    working_directory: ~/healthier
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # Using the RAM variation mitigates I/O contention
-      # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
-      #
-      # - image: redis:2.8.19
-
+jobs:
+  test:
+    executor: laravel57
     steps:
       - checkout
-
-#      - run: apt-get update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-#      - run: docker-php-ext-install zip
-#      - run: docker-php-ext-install pdo_mysql
-#
-#      # Download and cache dependencies
-#      - restore_cache:
-#          keys:
-#            # "composer.lock" can be used if it is committed to the repo
-#            - v1-dependencies-{{ checksum "composer.json" }}
-#            # fallback to using the latest cache if no exact match is found
-#            - v1-dependencies-
-#
       - run:
           name: Download Composer
           command: |
@@ -43,39 +23,23 @@ jobs:
             php -r "unlink('composer-setup.php');"
             php composer.phar self-update
             mv composer.phar /usr/local/bin/composer
-
       - run:
           name: Run Composer Install
           command: |
             composer install -n --prefer-dist
-
-
-
-#      - run:
-#          name: Composer Install
-#          command: |
-#           composer install -n --prefer-dist
-#
-#      - save_cache:
-#          key: v1-dependencies-{{ checksum "composer.json" }}
-#          paths:
-#            - ./vendor
-#      - restore_cache:
-#          keys:
-#            - node-v1-{{ checksum "package.json" }}
-#            - node-v1-
-#      - run: yarn install
-#      - save_cache:
-#          key: node-v1-{{ checksum "package.json" }}
-#          paths:
-#            - node_modules
-#
-#      # prepare the database
-#      - run: touch storage/testing.sqlite
-#      - run: php artisan migrate --env=testing --database=sqlite_testing --force
-
-      # run tests with phpunit or codecept
       - run:
           name: Run Unit Test
           command: |
             php ./vendor/bin/phpunit
+
+workflows:
+  version: 2
+  test_build_push:
+    jobs:
+      - test:
+          context: jr-services
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^v.*/
