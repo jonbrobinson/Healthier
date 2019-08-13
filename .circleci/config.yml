@@ -5,14 +5,13 @@
 version: 2
 
 executors:
-  laravel57:
     docker:
       - image: jrcodes/laravel57-php73
     working_directory: ~/healthier
 
 jobs:
   test:
-    executor: laravel57
+    executor: docker
     steps:
       - checkout
       - run:
