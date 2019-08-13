@@ -3,15 +3,10 @@
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
 version: 2
-
-executors:
+jobs:
+  build:
     docker:
       - image: jrcodes/laravel57-php73
-    working_directory: ~/healthier
-
-jobs:
-  test:
-    executor: docker
     steps:
       - checkout
       - run:
@@ -27,17 +22,6 @@ jobs:
           command: |
             composer install -n --prefer-dist
       - run:
-          name: Run Unit Test
+          name: Unit Test
           command: |
-            php ./vendor/bin/phpunit
-
-workflows:
-  version: 2
-  test_build_push:
-    jobs:
-      - test:
-          filters:
-            branches:
-              only: /.*/
-            tags:
-              only: /^v.*/
+            ./vendor/bin/phpunit
