@@ -28,9 +28,10 @@ jobs:
       - run:
           name: Add Env File
           command: |
-            read -r -d '' VAR <<'EOF'
+            var=$(cat <<'EOF'
             APP_NAME=${App_Name}
             APP_ENV=${App_Env_Local}
             APP_KEY=${App_Key}
             EOF
+            )
             echo "$VAR"
