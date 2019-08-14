@@ -38,3 +38,8 @@ jobs:
             cat ./.circleci/.test
             echo -----------
             echo "$VAR"
+            echo -----------
+            cat ./.circleci/_env | while read line
+            do
+            echo "$line"
+            done
