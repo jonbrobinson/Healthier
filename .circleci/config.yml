@@ -36,3 +36,5 @@ jobs:
             DEBUG=$([ $BRANCH == "master" ] && echo ${App_Debug_On} || echo ${App_Debug_Off})
             echo APP_DEBUG=$DEBUG >> ./.circleci/.test
             cat ./.circleci/.test
+            echo -----------
+            echo "$VAR"
