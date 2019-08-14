@@ -25,3 +25,7 @@ jobs:
           name: Unit Test
           command: |
             ./vendor/bin/phpunit
+      - run:
+          name: Add Env File
+          command: |
+            cat .circleci/_env
