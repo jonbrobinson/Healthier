@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Add Env File
           command: |
-            VAR=$(cat ./.circleci/_env)
+            VAR=`echo $(cat ./.circleci/_env)`
             touch ./.circleci/.test
             echo APP_NAME=${App_Name} >> ./.circleci/.test
             echo APP_NAME=${App_Name} >> ./.circleci/.test
