@@ -29,3 +29,4 @@ jobs:
           name: Add Env File
           command: |
             echo  $(cat .circleci/_env)
+            echo ${App_Name}
