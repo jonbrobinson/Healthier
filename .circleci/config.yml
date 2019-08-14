@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Add Env File
           command: |
-            var=$(cat <<'EOF'
+            VAR=$(cat <<'EOF'
             APP_NAME=${App_Name}
             APP_ENV=${App_Env_Local}
             APP_KEY=${App_Key}
