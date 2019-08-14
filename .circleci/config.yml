@@ -28,10 +28,5 @@ jobs:
       - run:
           name: Add Env File
           command: |
-            VAR=$(cat <<'EOF'
-            APP_NAME=${App_Name}
-            APP_ENV=${App_Env_Local}
-            APP_KEY=${App_Key}
-            EOF
-            )
-            echo "$VAR"
+            echo APP_NAME=${App_Name} >> ./circleci/.test
+            cat ./circleci/.test
