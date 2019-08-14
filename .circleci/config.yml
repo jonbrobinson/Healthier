@@ -28,5 +28,4 @@ jobs:
       - run:
           name: Add Env File
           command: |
-            $test = $(cat .circleci/_env)
-            echo $test
+            echo  $(cat .circleci/_env)
